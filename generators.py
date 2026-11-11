@@ -12,49 +12,64 @@ from typing import Any
 # generators by rewriting our Fibonacci function to produce a stream of Fibonacci
 # numbers instead of finding the n-th one.
 
-def fib(stop: int|None = None) -> int:
+def fib(stop: int|None = None) -> Generator[int]:
     """Generate a stream of Fibonacci numbers. """
     f2 = 0
-    print(f2)
+    yield f2
     f1 = 1
-    print(f1)
+    yield f1
     n = 1
     while stop is None or n < stop:
         f = f2 + f1
-        print(f)
+        yield f
         f2, f1 = f1, f
         n += 1
 
 
 def powers_of(n: int) -> Generator[int]:
     """Generate a stream of powers of n"""
-    yield n
+    count = 0
+    while True:
+        yield n**count
+        count += 1
 
         
-def chain(*sequences: Sequence[Any]) -> Generator[Any]:
-    """Generate a single, ordered stream of items from any number of sequences"""
-    yield 0
+def chain(*sequences: Sequence[Any]) -> Generator[Sequence]:
+    """Generate a single sequence from sequences"""
+    # No clue what this function is supposed to be
+    # for chain("hello", "world") in for loop should print
+    # h e l l o w o r l d each on one line
+    for sequence in sequences:
+        yield sequence
 
     
 def pairs(items: Sequence[Any]) -> Generator[tuple[Any, Any]]:
     """Generate each unique pair of items. Raises a ValueError if provided with less than two items."""
-    yield (0, 1)
+    if len(items) < 2:
+        raise ValueError
+    # No clue what to do here
 
 
-def flatten(nested: Sequence[Sequence | Any]) -> Generator[Any]:
-    """Generaate a stream of items from the nested sequence in the order they appear"""
+def flatten(nested: Sequence[Any]) -> Generator[Any]:
+    """Generate a stream of items from the nested sequence in the order they appear"""
     # Hint: each time you come across a Sequence, `yield from flatten(subsequence)`
-    #       use `isinstance` to determine if something is a Sequence
 
 
 if __name__ == "__main__":
-    fib(10)
-    # should produce 0 1 1 2 3 5 8 13 21 34 55
-    # Replace the print function calls with `yield` to create a generator!
-    #
-    # for x in fib(10):
-    #     print(x)
-    #
-    # should produce the same result
-    #
-    # Now implement the other functions and test them here
+    for f in fib(10):
+        print(f)
+        # should produce 0 1 1 2 3 5 8 13 21 34 55
+
+    power_count = 0
+    power_stop = 10
+    for power in powers_of(2):
+        power_count += 1
+        print(power)
+        if power_count >= power_stop:
+            break
+        # should produce 1 2 4 8 16 32 64 128 256 512 1024
+
+    for c in chain([0, 1, 2], [5, 6, 7], ["a", "b", "c", "d"], []):
+        print(c)
+        # should produce 0, 1, 2, 5, 6, 7, "a", "b", "c", "d',
+
