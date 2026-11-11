@@ -36,11 +36,9 @@ def powers_of(n: int) -> Generator[int]:
         
 def chain(*sequences: Sequence[Any]) -> Generator[Sequence]:
     """Generate a single sequence from sequences"""
-    # No clue what this function is supposed to be
-    # for chain("hello", "world") in for loop should print
-    # h e l l o w o r l d each on one line
     for sequence in sequences:
-        yield sequence
+        for item in sequence:
+            yield item
 
     
 def pairs(items: Sequence[Any]) -> Generator[tuple[Any, Any]]:
@@ -53,7 +51,7 @@ def pairs(items: Sequence[Any]) -> Generator[tuple[Any, Any]]:
 def flatten(nested: Sequence[Any]) -> Generator[Any]:
     """Generate a stream of items from the nested sequence in the order they appear"""
     # Hint: each time you come across a Sequence, `yield from flatten(subsequence)`
-
+    # TODO: perhaps check if each item in `nested` is both Sequence and not str, and yield each
 
 if __name__ == "__main__":
     for f in fib(10):
