@@ -45,13 +45,19 @@ def pairs(items: Sequence[Any]) -> Generator[tuple[Any, Any]]:
     """Generate each unique pair of items. Raises a ValueError if provided with less than two items."""
     if len(items) < 2:
         raise ValueError
-    # No clue what to do here
+    for i in range(len(items)):
+        for j in range(i+1, len(items)):
+            yield items[i], items[j]
 
 
 def flatten(nested: Sequence[Any]) -> Generator[Any]:
     """Generate a stream of items from the nested sequence in the order they appear"""
     # Hint: each time you come across a Sequence, `yield from flatten(subsequence)`
-    # TODO: perhaps check if each item in `nested` is both Sequence and not str, and yield each
+    for item in nested:
+        if isinstance(item, Sequence) and not isinstance(item, str):
+            yield from flatten(item)
+        else:
+            yield item
 
 if __name__ == "__main__":
     for f in fib(10):
