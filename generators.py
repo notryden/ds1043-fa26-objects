@@ -77,3 +77,10 @@ if __name__ == "__main__":
         print(c)
         # should produce 0, 1, 2, 5, 6, 7, "a", "b", "c", "d',
 
+    for p in pairs(range(8)):
+        print(p)
+        # should print (0,1) (0,2) (0,3) ... (6,7)
+
+    for f in flatten([1, 2, [3, 4, 5], "hello", 6, 7, ["a", "b", "c"]]):
+        print(f)
+        # should print 1 2 3 4 5 hello 6 7 a b c
