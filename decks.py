@@ -17,8 +17,8 @@ Card = namedtuple('Card', ['rank', 'suit'])
 
 # When you create an *instance* of Card, you can get rank and suit via dot notation
 # ace = Card('A', 'spades')
-# ace.rank
-# ace.suit
+# ace.rank  -> 'A'
+# ace.suit  -> 'spades'
 
 class FrenchDeck:  # class definition compound statement
     ranks = [str(n) for n in range(2, 11)] + list('JQKA')
@@ -27,7 +27,7 @@ class FrenchDeck:  # class definition compound statement
 
     # this function is run whenever you initialize a new object via FrenchDeck()
     def __init__(self):
-        # the first parameter references the object we working with
+        # the first parameter references the object we are working with
         # the convention is to use the name `self` for this reference
         # this parameter is automatically filled in when you use dot notation
         self._cards = [Card(rank, suit) for suit in self.suits

@@ -25,4 +25,7 @@ def test_pairs():
                                                              ('c', 'e'), ('d', 'e')]
 
 def test_flatten():
-    assert generators.flatten([[[1, 2], 3], [4, 5]]) == [1, 2, 3, 4, 5]
+    a = []
+    for f in generators.flatten([[[1, 2], 3], [4, 5]]):
+        a.append(f)
+    assert a == [1, 2, 3, 4, 5]

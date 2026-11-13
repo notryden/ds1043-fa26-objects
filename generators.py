@@ -46,7 +46,7 @@ def pairs(items: Sequence[Any]) -> Generator[tuple[Any, Any]]:
     if len(items) < 2:
         raise ValueError
     for i in range(len(items)):
-        for j in range(i+1, len(items)):
+        for j in range(i + 1, len(items)):
             yield items[i], items[j]
 
 
